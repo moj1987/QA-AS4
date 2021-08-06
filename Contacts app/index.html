@@ -1,0 +1,74 @@
+<!-- Partially taken from 
+    https://codepen.io/sola/pen/GyOReX
+-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Contacts</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles/normalize.css">
+        <link rel="stylesheet" href="styles/main.css"/>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+
+    <body>
+        <h1>PROG8170–Software Quality Techniques: Spring/Summer 2021 Assignment 04</h1>
+        <h2>Contacts</h2>
+
+        <div id="navigation">
+            <ul class="nav-list">
+                <li id="js-show-all">Search</li>
+            
+                <li id="js-add-new">New</li>
+            </ul>
+        </div>
+
+        
+        <div id="contact-panel" class="panel">
+        <form id="contact" action="#" onsubmit="return validateForm()">
+            <h1>Add a new contact</h1>
+            <div>
+                <label>
+                    <input required type="text" name="firstName" id="name" placeholder="Moj" />
+                </label>
+               <label>
+                    <input  type="text" name="lastName" id="name" placeholder="Abbasszadeh" />
+                </label>
+
+                <label>
+                    <input type="text" name="address" id="name" placeholder="Address" />
+                </label>
+                <label>
+                    <input type="text" name="city" id="name" placeholder="City" />
+                </label>
+
+                <label>
+                    <input type="text" name="province" id="name" placeholder="Province" />
+                </label>
+                <label>
+                    <input type="text" name="postalCode" id="name" pattern="^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$" placeholder="Postal Code" />
+                </label>
+                <label>
+                    <input type="tel" name="phone" id="name" placeholder="226-226-2626" />
+                </label>
+                <label>
+                    <input type="email" name="email" id="name" placeholder="moj@moj.moj" />
+                </label>
+            </div>
+             <textarea name="notes" form="contact" placeholder="Enter notes here..."></textarea> 
+            <div>
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+<div id = "show-panel" class="panel">
+  
+</div>
+<div id = "new-panel" class="panel">
+  
+</div>
+      
+        <script src="scripts/contacts.js"></script>
+    </body>
+</html>
