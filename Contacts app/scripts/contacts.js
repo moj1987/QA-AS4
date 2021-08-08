@@ -96,7 +96,7 @@
       let Contacts = Object.keys(window.localStorage);
       let ContactLength = Contacts.length;
       let i = ContactLength;
-      let tempData=[];
+      let tempData = [];
       if (ContactLength) {
         while (i--) {
           tempData.push(JSON.parse(localStorage.getItem(Contacts[i])));
@@ -161,7 +161,32 @@ if (!window.contactList) {
 }
 
 var form = document.getElementById("contact");
+
 form.addEventListener("submit", function () {
+  //Check Postal code
+  let postalPattern = /[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d/;
+  var isPostalCodeFormatted = postalPattern.test(form.postalCode.value);
+  if (!isPostalCodeFormatted) {
+    alert("Postal code");
+    return;
+  }
+
+  //Check phone number
+  let phonePattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  var isPhoneNumberFormatted = phonePattern.test(form.phone.value);
+  if (!isPhoneNumberFormatted) {
+    alert("Phone number");
+    return;
+  }
+
+  //Check email
+  let emailPattern = /\S+@\S+\.\S+/;
+  var isEmailFormatted = emailPattern.test(form.email.value);
+  if (!isEmailFormatted) {
+    alert("Email!");
+    return;
+  }
+
   if (!window.contactList) {
     //check if we already have a contact list
     window.contactList = $ab(
