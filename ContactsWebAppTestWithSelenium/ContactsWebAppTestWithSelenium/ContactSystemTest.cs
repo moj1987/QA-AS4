@@ -82,7 +82,7 @@ namespace ContactsWebAppTestWithSelenium
         }
 
         [Test]
-        public void clickingOnSearchTakesToSearchPageClickOnSearchButtonSearchPageShows()
+        public void clickingOnSearchTakesToSearchPage_ClickOnSearchButton_SearchPageShows()
         {
             driver.Navigate().GoToUrl("http://127.0.0.1:5500/");
             driver.Manage().Window.Size = new System.Drawing.Size(945, 860);
@@ -94,7 +94,7 @@ namespace ContactsWebAppTestWithSelenium
         }
 
         [Test]
-        public void deleteButtonRemovesInputAllFieldsWithLabelAsStringNonExistant()
+        public void deleteButtonRemovesInput_AllFieldsWithLabel_AsStringNonExistant()
         {
             driver.Navigate().GoToUrl("http://127.0.0.1:5500/");
             driver.Manage().Window.Size = new System.Drawing.Size(945, 1020);
@@ -113,11 +113,11 @@ namespace ContactsWebAppTestWithSelenium
             driver.FindElement(By.LinkText("Moj Abb")).Click();
             driver.FindElement(By.Id("remove")).Click();
             driver.FindElement(By.Id("js-show-all")).Click();
-            Assert.That(driver.FindElement(By.CssSelector(".contact-item")).Text, Is.Not.EqualTo("First name:Moj\\\\nLast name:Abb\\\\nAddress:Westwood\\\\nCity:Kitchener\\\\nProvince:ON\\\\nPostal Code:N2T2G2\\\\nPhone:2262262266\\\\nEmail:moj@moj.com\\\\nNotes:Hi"));
+            Assert.That(driver.FindElement(By.Id("show-panel")).Text, Is.Not.EqualTo("Moj"));
         }
 
         [Test]
-        public void homeButtonGoesToIndexPageAllFieldsWithLabelAsStringGoesToIndexPage()
+        public void homeButtonGoesToIndexPage_AllFieldsWithLabeleAsString_GoesToIndexPage()
         {
             driver.Navigate().GoToUrl("http://127.0.0.1:5500/");
             driver.Manage().Window.Size = new System.Drawing.Size(945, 1020);
@@ -139,7 +139,7 @@ namespace ContactsWebAppTestWithSelenium
         }
 
         [Test]
-        public void savedDataEqualsInputAllFieldsWithLabelAsStringAllFieldsWithLabelAsString()
+        public void savedDataEqualsInput_AllFieldsWithLabelAsString_AllFieldsWithLabelAsString()
         {
             driver.Navigate().GoToUrl("http://127.0.0.1:5500/");
             driver.Manage().Window.Size = new System.Drawing.Size(945, 1020);
@@ -158,11 +158,11 @@ namespace ContactsWebAppTestWithSelenium
             driver.FindElement(By.LinkText("Moj Abb")).Click();
             driver.FindElement(By.Id("home")).Click();
             driver.FindElement(By.Id("js-show-all")).Click();
-            Assert.That(driver.FindElement(By.CssSelector(".contact-item")).Text, Is.EqualTo("First name:Moj\\\\nLast name:Abb\\\\nAddress:Westwood\\\\nCity:Kitchener\\\\nProvince:ON\\\\nPostal Code:N2T2G2\\\\nPhone:2262262266\\\\nEmail:moj@moj.com\\\\nNotes:Hi"));
+            Assert.That(driver.FindElement(By.CssSelector(".contact-item")).Text, Is.EqualTo("First name:Moj\r\nLast name:Abb\r\nAddress:Westwood\r\nCity:Kitchener\r\nProvince:ON\r\nPostal Code:N2T2G2\r\nPhone:2262262266\r\nEmail:moj@moj.com\r\nNotes:Hi"));
         }
 
         [Test]
-        public void hyperlinkTakesToNextPageClickOnNewContactRedirectToShowPage()
+        public void hyperlinkTakesToNextPage_ClickOnNewContact_RedirectToShowPage()
         {
             driver.Navigate().GoToUrl("http://127.0.0.1:5500/");
             driver.Manage().Window.Size = new System.Drawing.Size(900, 755);
@@ -183,7 +183,7 @@ namespace ContactsWebAppTestWithSelenium
         }
 
         [Test]
-        public void clickingOnNewTakesToInputDataPageClickOnNewButtonAddANewContactPageShows()
+        public void clickingOnNewTakesToInputDataPage_ClickOnNewButton_AddANewContactPageShows()
         {
             driver.Navigate().GoToUrl("http://127.0.0.1:5500/");
             driver.Manage().Window.Size = new System.Drawing.Size(945, 860);
@@ -207,31 +207,7 @@ namespace ContactsWebAppTestWithSelenium
             driver.FindElement(By.Name("email")).SendKeys("moj@moj");
             driver.FindElement(By.Name("notes")).SendKeys("Hi");
             driver.FindElement(By.CssSelector("div > input")).Click();
-            driver.FindElement(By.Id("name")).Click();
-            driver.FindElement(By.Id("name")).SendKeys("Moj");
-            driver.FindElement(By.Name("lastName")).SendKeys("Abb");
-            driver.FindElement(By.Name("address")).SendKeys("Westwood");
-            driver.FindElement(By.Name("city")).SendKeys("Kitchener");
-            driver.FindElement(By.Name("province")).SendKeys("ON");
-            driver.FindElement(By.Name("postalCode")).SendKeys("N2T2G2");
-            driver.FindElement(By.Name("phone")).SendKeys("2262262266");
-            driver.FindElement(By.Name("email")).SendKeys("moj@moj");
-            driver.FindElement(By.Name("notes")).Click();
-            driver.FindElement(By.Name("notes")).SendKeys("hi");
-            driver.FindElement(By.CssSelector("div > input")).Click();
-            driver.FindElement(By.Id("name")).Click();
-            driver.FindElement(By.Id("name")).SendKeys("Moj");
-            driver.FindElement(By.Name("lastName")).SendKeys("Abb");
-            driver.FindElement(By.Name("address")).SendKeys("Westwood");
-            driver.FindElement(By.Name("city")).SendKeys("Kitchener");
-            driver.FindElement(By.Name("province")).SendKeys("ON");
-            driver.FindElement(By.Name("postalCode")).SendKeys("N2T2G2");
-            driver.FindElement(By.Name("phone")).SendKeys("2262262266");
-            driver.FindElement(By.Name("email")).SendKeys("moj@moj");
-            driver.FindElement(By.Name("notes")).Click();
-            driver.FindElement(By.Name("notes")).SendKeys("hi");
-            driver.FindElement(By.CssSelector("div > input")).Click();
-            Assert.That(driver.SwitchTo().Alert().Text, Is.EqualTo("Email!"));
+            Assert.That(driver.FindElement(By.CssSelector("#error > div")).Text, Is.EqualTo("Email format is wrong"));
         }
 
         [Test]
@@ -244,40 +220,12 @@ namespace ContactsWebAppTestWithSelenium
             driver.FindElement(By.Name("address")).SendKeys("Westwood");
             driver.FindElement(By.Name("city")).SendKeys("Kitchener");
             driver.FindElement(By.Name("province")).SendKeys("ON");
-            driver.FindElement(By.Name("postalCode")).SendKeys("2N2N2N");
+            driver.FindElement(By.Name("postalCode")).SendKeys("N2T2G2");
             driver.FindElement(By.Name("phone")).SendKeys("226226226600");
             driver.FindElement(By.Name("email")).SendKeys("moj@moj.com");
             driver.FindElement(By.Name("notes")).SendKeys("Hi");
             driver.FindElement(By.CssSelector("div > input")).Click();
-            driver.FindElement(By.Id("name")).Click();
-            driver.FindElement(By.Id("name")).SendKeys("Moj");
-            driver.FindElement(By.Name("lastName")).SendKeys("Abb");
-            driver.FindElement(By.Name("address")).SendKeys("Westwood");
-            driver.FindElement(By.Name("city")).SendKeys("Kitchener");
-            driver.FindElement(By.Name("province")).SendKeys("ON");
-            driver.FindElement(By.Name("postalCode")).SendKeys("N2T2G2");
-            driver.FindElement(By.Name("phone")).SendKeys("2262262266");
-            driver.FindElement(By.Name("email")).SendKeys("moj@moj.com");
-            driver.FindElement(By.Name("notes")).Click();
-            driver.FindElement(By.Name("notes")).SendKeys("hi");
-            driver.FindElement(By.Name("phone")).Click();
-            driver.FindElement(By.Name("phone")).SendKeys("22622622");
-            driver.FindElement(By.CssSelector("div > input")).Click();
-            driver.FindElement(By.Id("name")).Click();
-            driver.FindElement(By.Id("name")).SendKeys("Moj");
-            driver.FindElement(By.Name("lastName")).SendKeys("Abb");
-            driver.FindElement(By.Name("address")).SendKeys("Westwood");
-            driver.FindElement(By.Name("city")).SendKeys("Kitchener");
-            driver.FindElement(By.Name("province")).SendKeys("ON");
-            driver.FindElement(By.Name("postalCode")).SendKeys("N2T2G2");
-            driver.FindElement(By.Name("phone")).SendKeys("2262262266");
-            driver.FindElement(By.Name("email")).SendKeys("moj@moj.com");
-            driver.FindElement(By.Name("notes")).Click();
-            driver.FindElement(By.Name("notes")).SendKeys("hi");
-            driver.FindElement(By.Name("phone")).Click();
-            driver.FindElement(By.Name("phone")).SendKeys("22622622");
-            driver.FindElement(By.CssSelector("div > input")).Click();
-            Assert.That(driver.SwitchTo().Alert().Text, Is.EqualTo("Phone number"));
+            Assert.That(driver.FindElement(By.CssSelector("#error > div")).Text, Is.EqualTo("Phone number format is wrong"));
         }
 
         [Test]
@@ -285,36 +233,17 @@ namespace ContactsWebAppTestWithSelenium
         {
             driver.Navigate().GoToUrl("http://127.0.0.1:5500/index.html");
             driver.Manage().Window.Size = new System.Drawing.Size(900, 755);
-            driver.FindElement(By.Id("name")).Click();
             driver.FindElement(By.Id("name")).SendKeys("Moj");
             driver.FindElement(By.Name("lastName")).SendKeys("Abb");
             driver.FindElement(By.Name("address")).SendKeys("Westwood");
             driver.FindElement(By.Name("city")).SendKeys("Kitchener");
             driver.FindElement(By.Name("province")).SendKeys("ON");
-            driver.FindElement(By.Name("postalCode")).SendKeys("N2T2G2");
+            driver.FindElement(By.Name("postalCode")).SendKeys("N2T2G");
             driver.FindElement(By.Name("phone")).SendKeys("2262262266");
             driver.FindElement(By.Name("email")).SendKeys("moj@moj");
-            driver.FindElement(By.Name("email")).Click();
-            driver.FindElement(By.Name("email")).SendKeys("moj@moj.com");
-            driver.FindElement(By.Name("postalCode")).Click();
-            driver.FindElement(By.Name("postalCode")).SendKeys("N2T2G");
-            driver.FindElement(By.Name("notes")).Click();
             driver.FindElement(By.Name("notes")).SendKeys("hi");
             driver.FindElement(By.CssSelector("div > input")).Click();
-            driver.FindElement(By.Id("name")).Click();
-            driver.FindElement(By.Id("name")).SendKeys("Moj");
-            driver.FindElement(By.Name("lastName")).SendKeys("Abb");
-            driver.FindElement(By.Name("address")).SendKeys("Westwood");
-            driver.FindElement(By.Name("city")).SendKeys("Kitchener");
-            driver.FindElement(By.Name("province")).SendKeys("ON");
-            driver.FindElement(By.Name("postalCode")).SendKeys("N2T2G");
-            driver.FindElement(By.Name("phone")).SendKeys("2262262266");
-            driver.FindElement(By.Name("email")).SendKeys("moj@moj.com");
-            driver.FindElement(By.Name("notes")).Click();
-            driver.FindElement(By.Name("notes")).SendKeys("hi");
-            driver.FindElement(By.CssSelector("div > input")).Click();
-            driver.FindElement(By.CssSelector("div > input")).Click();
-            Assert.That(driver.SwitchTo().Alert().Text, Is.EqualTo("Postal code"));
+            Assert.That(driver.FindElement(By.CssSelector("#error > div")).Text, Is.EqualTo("Postal code format is wrong"));
         }
     }
 }

@@ -84,14 +84,6 @@
       console.log(x);
     },
 
-    // displayData: function () {
-    //   this.log(this.data);
-    //   return this;
-    // },
-    // log: function (data) {
-    //   console.log(data);
-    //   return this;
-    // },
     returnAll: function () {
       let Contacts = Object.keys(window.localStorage);
       let ContactLength = Contacts.length;
@@ -105,7 +97,6 @@
       } else {
         console.log("There are no results");
       }
-      //return this;
     },
     lastResults: function () {
       return this.searchResults;
@@ -162,12 +153,15 @@ if (!window.contactList) {
 
 var form = document.getElementById("contact");
 
-form.addEventListener("submit", function () {
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
   //Check Postal code
   let postalPattern = /[A-Za-z]\d[A-Za-z] ?\d[A-Za-z]\d/;
   var isPostalCodeFormatted = postalPattern.test(form.postalCode.value);
   if (!isPostalCodeFormatted) {
-    alert("Postal code");
+    document.getElementById("error").innerHTML =
+      "<div>Postal code format is wrong</div><hr>";
     return;
   }
 
@@ -175,7 +169,8 @@ form.addEventListener("submit", function () {
   let phonePattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   var isPhoneNumberFormatted = phonePattern.test(form.phone.value);
   if (!isPhoneNumberFormatted) {
-    alert("Phone number");
+    document.getElementById("error").innerHTML =
+      "<div>Phone number format is wrong</div><hr>";
     return;
   }
 
@@ -183,7 +178,8 @@ form.addEventListener("submit", function () {
   let emailPattern = /\S+@\S+\.\S+/;
   var isEmailFormatted = emailPattern.test(form.email.value);
   if (!isEmailFormatted) {
-    alert("Email!");
+    document.getElementById("error").innerHTML =
+      "<div>Email format is wrong</div><hr>";
     return;
   }
 
@@ -245,8 +241,6 @@ form.addEventListener("submit", function () {
   form.phone.value = "";
   form.email.value = "";
   form.notes.value = "";
-
-  event.preventDefault();
 });
 
 document.getElementById("js-show-all").addEventListener("click", function () {
